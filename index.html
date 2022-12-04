@@ -14,10 +14,7 @@
     <div>
       <h2>Password Generator</h2>
       <label for="lengthInput">Length</label>
-      <input type="number" id="lengthInput" min="1" value="40" />
-      <label for="count">Count </label>
-      <input type="number" id="count" min="1" value="10" />
-
+      <input type="number" id="lengthInput" min="1" value="41" />
       <h3>Character Types:</h3>
 
       <input type="checkbox" id="numbers" checked />
@@ -50,10 +47,20 @@
       <br />
       <br />
 
-      <button onclick="generatePasswords()">Refresh Passwords</button>
-
+      Entopy:
+      <span title="1 bit = 1 Shannon. UUID v4 has 122 bits = 122 Shannon">
+        <code id="entropy">0</code>
+        Shannon (<code><span id="entropyScaled">0</span></code>
+        times that of a UUID v4 )
+      </span>
       <br /><br />
-      <h3>Generated Passwords:</h3>
+
+      <label for="count">Count </label>
+      <input type="number" id="count" min="1" value="10" />
+
+      <button onclick="generatePasswords()">Refresh Output</button>
+
+      <br />
       <ul style="list-style: none; padding-left: 0" id="passwordList"></ul>
 
       <script src="script.js"></script>

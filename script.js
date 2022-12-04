@@ -31,9 +31,16 @@ function removeDuplicates(inputString) {
 }
 
 
+function getEntropy(length, characters) {
+    if (length == 0 || characters.length == 0) {
+        return 0;
+    }
+    return length * Math.log2(characters.length);
+}
+
 
 function generatePasswords() {
-    let length = document.getElementById('lengthInput').value;
+    let length = parseInt(document.getElementById('lengthInput').value);
     let count = document.getElementById('count').value;
     let characters = '';
     let passwordList = document.getElementById('passwordList');
@@ -46,6 +53,11 @@ function generatePasswords() {
     if (document.getElementById('specialChars').checked) characters += '~!@#$%^&*()_-=+,./?;:[]';
     if (document.getElementById('confusing').checked) characters += '\\\'\"\`{} <>|';
     characters = removeDuplicates(characters);
+
+    let shannon = getEntropy(length, characters);
+    document.getElementById('entropy').innerHTML = shannon.toFixed(1);
+    let shannonScaled = shannon / 122;
+    document.getElementById('entropyScaled').innerHTML = shannonScaled.toFixed(3);
 
     if (characters.length === 0) {
         passwordList.innerHTML = '<li>Please select at least one character type.</li>';
