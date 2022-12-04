@@ -43,7 +43,7 @@ function generatePasswords() {
     if (document.getElementById('smallCase').checked) characters += 'abcdefghijklmnopqrstuvwxyz';
     if (document.getElementById('numbers').checked) characters += '0123456789';
     if (document.getElementById('unreserved').checked) characters += '_-~.';
-    if (document.getElementById('specialChars').checked) characters += '~!@#$%^&*()+=,./?;:[]';
+    if (document.getElementById('specialChars').checked) characters += '~!@#$%^&*()_-=+,./?;:[]';
     if (document.getElementById('confusing').checked) characters += '\\\'\"\`{} <>|';
     characters = removeDuplicates(characters);
 
