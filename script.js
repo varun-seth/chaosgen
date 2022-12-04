@@ -1,10 +1,17 @@
 function generateRandomString(length, characters) {
     var result = '';
     var charactersLength = characters.length;
-    var randomValues = new Uint32Array(length);
-    window.crypto.getRandomValues(randomValues);
+    var maxValidRange = Math.floor(0xFFFFFFFF / charactersLength) * charactersLength;
+    var randomArray = new Uint32Array(1); // Single-element array for random values
+
     for (var i = 0; i < length; i++) {
-        result += characters.charAt(randomValues[i] % charactersLength);
+        var randomValue;
+        do {
+            window.crypto.getRandomValues(randomArray);
+            randomValue = randomArray[0];
+        } while (randomValue >= maxValidRange);
+
+        result += characters.charAt(randomValue % charactersLength);
     }
     return result;
 }
