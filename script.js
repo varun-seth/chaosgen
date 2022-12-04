@@ -1,11 +1,14 @@
 function generateRandomString(length, characters) {
     var result = '';
     var charactersLength = characters.length;
+    var randomValues = new Uint32Array(length);
+    window.crypto.getRandomValues(randomValues);
     for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(randomValues[i] % charactersLength);
     }
     return result;
 }
+
 
 function generatePasswords() {
     var length = document.getElementById('lengthSlider').value;
