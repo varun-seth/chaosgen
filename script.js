@@ -19,7 +19,7 @@ function generateRandomString(length, characters) {
 function removeDuplicates(inputString) {
     let result = '';
     let charSet = {};
-  
+
     for (let i = 0; i < inputString.length; i++) {
         let char = inputString[i];
         if (!charSet[char]) {
@@ -29,7 +29,8 @@ function removeDuplicates(inputString) {
     }
     return result;
 }
-  
+
+
 
 function generatePasswords() {
     let length = document.getElementById('lengthInput').value;
@@ -43,7 +44,7 @@ function generatePasswords() {
     if (document.getElementById('numbers').checked) characters += '0123456789';
     if (document.getElementById('unreserved').checked) characters += '_-~.';
     if (document.getElementById('specialChars').checked) characters += '~!@#$%^&*()+=,./?;:[]';
-    if (document.getElementById('confusing').checked) characters +=     '\\\'\"\`{} <>|';
+    if (document.getElementById('confusing').checked) characters += '\\\'\"\`{} <>|';
     characters = removeDuplicates(characters);
 
     if (characters.length === 0) {
@@ -53,22 +54,21 @@ function generatePasswords() {
 
     for (let i = 0; i < count; i++) {
         let password = generateRandomString(length, characters);
-    
+
         // Create elements
         let listItem = document.createElement('li');
         let codeElement = document.createElement('code');
-        let verbatimElement = document.createElement('verbatim');
         let buttonElement = document.createElement('button');
-    
+
         // Set content and attributes
-        verbatimElement.textContent = password;
+        codeElement.textContent = password;
+
         buttonElement.textContent = 'Copy';
-        buttonElement.addEventListener('click', function(){
+        buttonElement.addEventListener('click', function () {
             copyToClipboard(password, this);
         });
-    
+
         // Append elements to the DOM
-        codeElement.appendChild(verbatimElement);
         listItem.appendChild(codeElement);
         listItem.appendChild(buttonElement);
         passwordList.appendChild(listItem);
@@ -80,7 +80,7 @@ function generatePasswords() {
 function flashButton(button, newText, originalText) {
     button.textContent = newText;
 
-    setTimeout(function() {
+    setTimeout(function () {
         button.textContent = originalText;
         button.style.backgroundColor = "";
         button.style.color = "";
@@ -92,7 +92,7 @@ function copyToClipboard(text, button) {
     navigator.clipboard.writeText(text)
         .then(() => {
             console.log("Copied length: " + text.length);
-            flashButton(button,  'Copied!', 'Copy');
+            flashButton(button, 'Copied!', 'Copy');
         })
         .catch(err => {
             console.error('Could not copy text: ', err);
@@ -130,26 +130,26 @@ function loadSettings() {
     }
 }
 
-document.getElementById('lengthInput').oninput = function() {
+document.getElementById('lengthInput').oninput = function () {
     saveSettings();
     generatePasswords();
 };
 
-document.getElementById('count').oninput = function() {
+document.getElementById('count').oninput = function () {
     document.getElementById('count').textContent = this.value;
     saveSettings();
     generatePasswords();
 };
 
-document.querySelectorAll('input[type=checkbox]').forEach(function(checkbox) {
-    checkbox.onchange = function() {
+document.querySelectorAll('input[type=checkbox]').forEach(function (checkbox) {
+    checkbox.onchange = function () {
         saveSettings();
         generatePasswords();
     };
 });
 
 // Load settings and initial password generation
-window.onload = function() {
+window.onload = function () {
     loadSettings();
     generatePasswords();
 };

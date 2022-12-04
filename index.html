@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Password Generator</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <h2>Password Generator</h2>
+      <label for="lengthInput">Length: </label>
+      <input type="number" id="lengthInput" min="1" value="40" />
+      <input type="number" id="count" min="1" value="10" />
+      <label for="count">Count </label>
 
-</head>
-<body>
+      <h3>Character Types:</h3>
+      <input type="checkbox" id="numbers" checked /> Numbers (<code>0123</code>)
+      (10)<br />
+      <input type="checkbox" id="smallCase" checked /> Small case
+      (<code>abc</code>) (26)<br />
+      <input type="checkbox" id="capitals" checked /> Capitals
+      (<code>ABC</code>) (26)<br />
+      <input type="checkbox" id="unreserved" /> Unreserved Characters
+      (<code>~_-.</code>) (4)<br />
+      <input type="checkbox" id="specialChars" /> Special Characters (<code
+        >!@#$%</code
+      >
+      etc) (21) <br />
+      <input type="checkbox" id="confusing" /> Confusing Special Characters
+      (<code>`'"\{}</code> etc) (10) <br />
 
-    <div >
+      <br />
 
-    <h2>Password Generator</h2>
-    <label for="lengthInput">Length: </label>
-    <input type="number" id="lengthInput" min="1" value="40">
-    <input type="number" id="count" min="1" value="10">
-    <label for="count">Count </label>
+      <button onclick="generatePasswords()">Refresh Passwords</button>
 
-    <h3>Character Types:</h3>
-    <input type="checkbox" id="numbers" checked> Numbers (<code>0123</code>) (10)<br>
-    <input type="checkbox" id="smallCase" checked> Small case (<code>abc</code>) (26)<br>
-    <input type="checkbox" id="capitals" checked> Capitals (<code>ABC</code>) (26)<br>
-    <input type="checkbox" id="unreserved"> Unreserved Characters (<code>~_-.</code>) (4)<br>
-    <input type="checkbox" id="specialChars"> Special Characters (<code>!@#$%</code> etc) (21) <br>
-    <input type="checkbox" id="confusing"> Confusing Special Characters (<code>`'"\{}</code> etc) (10) <br>
+      <br /><br />
+      <h3>Generated Passwords:</h3>
+      <ul style="list-style: none; padding-left: 0" id="passwordList"></ul>
 
-    <br>
-
-    <button onclick="generatePasswords()">Refresh Passwords</button>
-    
-    <br><br>
-    <h3>Generated Passwords:</h3>
-    <ul style="list-style: none; padding-left: 0;" id="passwordList"></ul>
-
-    <script src="script.js"></script>
-</div>
-</body>
+      <script src="script.js"></script>
+    </div>
+  </body>
 </html>
