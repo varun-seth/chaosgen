@@ -1,11 +1,11 @@
 function generateRandomString(length, characters) {
-    var result = '';
-    var charactersLength = characters.length;
-    var maxValidRange = Math.floor(0xFFFFFFFF / charactersLength) * charactersLength;
-    var randomArray = new Uint32Array(1); // Single-element array for random values
+    let result = '';
+    let charactersLength = characters.length;
+    let maxValidRange = Math.floor(0xFFFFFFFF / charactersLength) * charactersLength;
+    let randomArray = new Uint32Array(1); // Single-element array for random values
 
-    for (var i = 0; i < length; i++) {
-        var randomValue;
+    for (let i = 0; i < length; i++) {
+        let randomValue;
         do {
             window.crypto.getRandomValues(randomArray);
             randomValue = randomArray[0];
@@ -17,11 +17,11 @@ function generateRandomString(length, characters) {
 }
 
 function removeDuplicates(inputString) {
-    var result = '';
-    var charSet = {};
+    let result = '';
+    let charSet = {};
   
-    for (var i = 0; i < inputString.length; i++) {
-        var char = inputString[i];
+    for (let i = 0; i < inputString.length; i++) {
+        let char = inputString[i];
         if (!charSet[char]) {
             result += char;
             charSet[char] = true;
@@ -32,10 +32,10 @@ function removeDuplicates(inputString) {
   
 
 function generatePasswords() {
-    var length = document.getElementById('lengthInput').value;
-    var count = document.getElementById('count').value;
-    var characters = '';
-    var passwordList = document.getElementById('passwordList');
+    let length = document.getElementById('lengthInput').value;
+    let count = document.getElementById('count').value;
+    let characters = '';
+    let passwordList = document.getElementById('passwordList');
     passwordList.innerHTML = '';
 
     if (document.getElementById('capitals').checked) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -116,9 +116,9 @@ function saveSettings() {
 }
 
 function loadSettings() {
-    var settings = JSON.parse(localStorage.getItem('settings'));
+    let settings = JSON.parse(localStorage.getItem('settings'));
     if (settings) {
-        var lengthSlider = document.getElementById('lengthInput');
+        let lengthSlider = document.getElementById('lengthInput');
         lengthSlider.value = settings.length;
         document.getElementById('count').value = settings.count;
         document.getElementById('capitals').checked = settings.capitals;
