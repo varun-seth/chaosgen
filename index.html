@@ -13,12 +13,14 @@
     <label for="lengthSlider">Length of string: <span id="sliderValue">5</span></label>
     <input type="range" id="lengthSlider" min="1" max="100" value="5">
 
-    
-    <h3>Select Character Types:</h3>
-    <input type="checkbox" id="capitals" checked> Capitals (ABC)<br>
-    <input type="checkbox" id="smallCase" checked> Small case (abc)<br>
+    <h3>Character Types:</h3>
     <input type="checkbox" id="numbers" checked> Numbers (0123)<br>
-
+    <input type="checkbox" id="smallCase" checked> Small case (abc)<br>
+    <input type="checkbox" id="capitals" checked> Capitals (ABC)<br>
+    <input type="checkbox" id="unreserved"> Unreserved Characters (~_-.)<br>
+    <input type="checkbox" id="specialChars"> Special Characters (!@#$% etc) (21) <br>
+    <input type="checkbox" id="confusing"> Confusing Special Characters (`'"\{} etc) (10) <br>
+    
     <input type="number" id="count" min="1" value="10"> Count <br>
 
     <button onclick="generatePasswords()">Refresh Passwords</button>

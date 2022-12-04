@@ -27,6 +27,9 @@ function generatePasswords() {
     if (document.getElementById('capitals').checked) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (document.getElementById('smallCase').checked) characters += 'abcdefghijklmnopqrstuvwxyz';
     if (document.getElementById('numbers').checked) characters += '0123456789';
+    if (document.getElementById('unreserved').checked) characters += '_-~.';
+    if (document.getElementById('specialChars').checked) characters += '~!@#$%^&*()+=,./?;:[]';
+    if (document.getElementById('confusing').checked) characters +=     '\\\'\"\`{} <>|';
 
     if (characters.length === 0) {
         passwordList.innerHTML = '<li>Please select at least one character type.</li>';
@@ -47,7 +50,10 @@ function saveSettings() {
         count: document.getElementById('count').value,
         capitals: document.getElementById('capitals').checked,
         smallCase: document.getElementById('smallCase').checked,
-        numbers: document.getElementById('numbers').checked
+        numbers: document.getElementById('numbers').checked,
+        unreserved: document.getElementById('unreserved').checked,
+        specialChars: document.getElementById('specialChars').checked,
+        confusing: document.getElementById('confusing').checked
     }));
 }
 
@@ -59,6 +65,9 @@ function loadSettings() {
         document.getElementById('capitals').checked = settings.capitals;
         document.getElementById('smallCase').checked = settings.smallCase;
         document.getElementById('numbers').checked = settings.numbers;
+        document.getElementById('unreserved').checked = settings.unreserved;
+        document.getElementById('specialChars').checked = settings.specialChars;
+        document.getElementById('confusing').checked = settings.confusing;
     }
 }
 
