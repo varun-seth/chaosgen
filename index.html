@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Password Generator</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css/out/water.min.css"
+    />
   </head>
   <body>
     <div>
       <h2>Password Generator</h2>
-      <label for="lengthInput">Length: </label>
+      <label for="lengthInput">Length</label>
       <input type="number" id="lengthInput" min="1" value="40" />
-      <input type="number" id="count" min="1" value="10" />
       <label for="count">Count </label>
+      <input type="number" id="count" min="1" value="10" />
 
       <h3>Character Types:</h3>
-      <input type="checkbox" id="numbers" checked /> Numbers (<code>0123</code>)
-      (10)<br />
-      <input type="checkbox" id="smallCase" checked /> Small case
-      (<code>abc</code>) (26)<br />
-      <input type="checkbox" id="capitals" checked /> Capitals
-      (<code>ABC</code>) (26)<br />
-      <input type="checkbox" id="unreserved" /> Unreserved Characters
-      (<code>~_-.</code>) (4)<br />
-      <input type="checkbox" id="specialChars" /> Special Characters (<code
-        >!@#$%</code
-      >
-      etc) (21) <br />
-      <input type="checkbox" id="confusing" /> Confusing Special Characters
-      (<code>`'"\{}</code> etc) (10) <br />
 
+      <input type="checkbox" id="numbers" checked />
+      Numbers
+      <span title="10 digit numbers"> <code>123</code> </span>
+      <br />
+      <input type="checkbox" id="smallCase" checked /> Small case
+      <span title="26 small alphabet letters"> <code>abc</code> </span>
+      <br />
+      <input type="checkbox" id="capitals" checked /> Capitals
+      <span title="26 Capital alphabet letters"> <code>ABC</code> </span>
+      <br />
+      <input type="checkbox" id="unreserved" /> Unreserved Special Characters
+      <span title="These 4 special characters can survive url-encoding.">
+        <code>~_-.</code>
+      </span>
+      <br />
+      <input type="checkbox" id="specialChars" />
+      Special Characters
+      <span title="21 special characters are ~!@#$%^&*()+=,./?;:[]">
+        <code>!@#</code>
+      </span>
+      <br />
+      <input type="checkbox" id="confusing" /> Confusing Special Characters
+      <span title="10 confusing characters are includes space, quotes, {}|<>">
+        <code>`'"</code>
+      </span>
+      <br />
       <br />
 
       <button onclick="generatePasswords()">Refresh Passwords</button>
