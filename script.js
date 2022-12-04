@@ -16,6 +16,20 @@ function generateRandomString(length, characters) {
     return result;
 }
 
+function removeDuplicates(inputString) {
+    var result = '';
+    var charSet = {};
+  
+    for (var i = 0; i < inputString.length; i++) {
+        var char = inputString[i];
+        if (!charSet[char]) {
+            result += char;
+            charSet[char] = true;
+        }
+    }
+    return result;
+}
+  
 
 function generatePasswords() {
     var length = document.getElementById('lengthInput').value;
@@ -30,6 +44,7 @@ function generatePasswords() {
     if (document.getElementById('unreserved').checked) characters += '_-~.';
     if (document.getElementById('specialChars').checked) characters += '~!@#$%^&*()+=,./?;:[]';
     if (document.getElementById('confusing').checked) characters +=     '\\\'\"\`{} <>|';
+    characters = removeDuplicates(characters);
 
     if (characters.length === 0) {
         passwordList.innerHTML = '<li>Please select at least one character type.</li>';
