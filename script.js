@@ -18,7 +18,7 @@ function generateRandomString(length, characters) {
 
 
 function generatePasswords() {
-    var length = document.getElementById('lengthSlider').value;
+    var length = document.getElementById('lengthInput').value;
     var count = document.getElementById('count').value;
     var characters = '';
     var passwordList = document.getElementById('passwordList');
@@ -38,15 +38,41 @@ function generatePasswords() {
 
     for (var i = 0; i < count; i++) {
         var password = generateRandomString(length, characters);
-        passwordList.innerHTML += '<li>' + password + '</li>';
+        passwordList.innerHTML += `<li><code>${password}</code> <button onclick="copyToClipboard('${password}', this)">Copy</button></li>`;
+
     }
 
     saveSettings();
 }
 
+function flashButton(button, newText, originalText) {
+    button.textContent = newText;
+
+    setTimeout(function() {
+        button.textContent = originalText;
+        button.style.backgroundColor = "";
+        button.style.color = "";
+    }, 1000); // Revert back after 1 second
+}
+
+
+function copyToClipboard(text, button) {
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            console.log("Copied length: " + text.length);
+            flashButton(button,  'Copied!', 'Copy');
+        })
+        .catch(err => {
+            console.error('Could not copy text: ', err);
+        });
+}
+
+
+
+
 function saveSettings() {
     localStorage.setItem('settings', JSON.stringify({
-        length: document.getElementById('lengthSlider').value,
+        length: document.getElementById('lengthInput').value,
         count: document.getElementById('count').value,
         capitals: document.getElementById('capitals').checked,
         smallCase: document.getElementById('smallCase').checked,
@@ -60,7 +86,8 @@ function saveSettings() {
 function loadSettings() {
     var settings = JSON.parse(localStorage.getItem('settings'));
     if (settings) {
-        document.getElementById('lengthSlider').value = settings.length;
+        var lengthSlider = document.getElementById('lengthInput');
+        lengthSlider.value = settings.length;
         document.getElementById('count').value = settings.count;
         document.getElementById('capitals').checked = settings.capitals;
         document.getElementById('smallCase').checked = settings.smallCase;
@@ -71,8 +98,7 @@ function loadSettings() {
     }
 }
 
-document.getElementById('lengthSlider').oninput = function() {
-    document.getElementById('sliderValue').textContent = this.value;
+document.getElementById('lengthInput').oninput = function() {
     saveSettings();
     generatePasswords();
 };

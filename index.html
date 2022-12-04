@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Random String Generator</title>
-    <style>
-        #passwordList {
-            font-family: 'Courier New', Courier, monospace;
-        }
-    </style>
+    <title>Password Generator</title>
+
 </head>
 <body>
-    <h2>Random String Generator</h2>
-    <label for="lengthSlider">Length of string: <span id="sliderValue">5</span></label>
-    <input type="range" id="lengthSlider" min="1" max="100" value="5">
+
+    <div >
+
+    <h2>Password Generator</h2>
+    <label for="lengthInput">Length: </label>
+    <input type="number" id="lengthInput" min="1" value="40">
+    <input type="number" id="count" min="1" value="10">
+    <label for="count">Count </label>
 
     <h3>Character Types:</h3>
     <input type="checkbox" id="numbers" checked> Numbers (0123)<br>
@@ -20,14 +21,16 @@
     <input type="checkbox" id="unreserved"> Unreserved Characters (~_-.)<br>
     <input type="checkbox" id="specialChars"> Special Characters (!@#$% etc) (21) <br>
     <input type="checkbox" id="confusing"> Confusing Special Characters (`'"\{} etc) (10) <br>
-    
-    <input type="number" id="count" min="1" value="10"> Count <br>
+
+    <br>
 
     <button onclick="generatePasswords()">Refresh Passwords</button>
-
+    
+    <br><br>
     <h3>Generated Passwords:</h3>
-    <ul id="passwordList"></ul>
+    <ul style="list-style: none; padding-left: 0;" id="passwordList"></ul>
 
     <script src="script.js"></script>
+</div>
 </body>
 </html>
