@@ -51,10 +51,27 @@ function generatePasswords() {
         return;
     }
 
-    for (var i = 0; i < count; i++) {
-        var password = generateRandomString(length, characters);
-        passwordList.innerHTML += `<li><code>${password}</code> <button onclick="copyToClipboard('${password}', this)">Copy</button></li>`;
-
+    for (let i = 0; i < count; i++) {
+        let password = generateRandomString(length, characters);
+    
+        // Create elements
+        let listItem = document.createElement('li');
+        let codeElement = document.createElement('code');
+        let verbatimElement = document.createElement('verbatim');
+        let buttonElement = document.createElement('button');
+    
+        // Set content and attributes
+        verbatimElement.textContent = password;
+        buttonElement.textContent = 'Copy';
+        buttonElement.addEventListener('click', function(){
+            copyToClipboard(password, this);
+        });
+    
+        // Append elements to the DOM
+        codeElement.appendChild(verbatimElement);
+        listItem.appendChild(codeElement);
+        listItem.appendChild(buttonElement);
+        passwordList.appendChild(listItem);
     }
 
     saveSettings();
