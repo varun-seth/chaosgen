@@ -94,17 +94,24 @@ function flashButton(button, newText, originalText) {
 
     setTimeout(function () {
         button.textContent = originalText;
-        button.style.backgroundColor = "";
-        button.style.color = "";
     }, 1000); // Revert back after 1 second
 }
 
+function shareURL(button) {
+    let settings = getSettings();
+    let params = settingsToParams(settings);
 
-function copyToClipboard(text, button) {
+    let url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+
+    copyToClipboard(url, button, "URL Copied!", "Share URL");
+    updateURL(settings);
+}
+
+function copyToClipboard(text, button, buttonTextTransit = 'Copied!', buttonText = 'Copy') {
     navigator.clipboard.writeText(text)
         .then(() => {
             console.log("Copied length: " + text.length);
-            flashButton(button, 'Copied!', 'Copy');
+            flashButton(button, buttonTextTransit, buttonText);
         })
         .catch(err => {
             console.error('Could not copy text: ', err);
@@ -134,8 +141,7 @@ function updateURL(settings) {
 function saveLocal(settings) {
     // localStorage.setItem('settings', JSON.stringify(settings));
 }
-
-function saveSettings() {
+function getSettings() {
     const settings = {
         length: document.getElementById('length').value,
         count: document.getElementById('count').value,
@@ -146,6 +152,10 @@ function saveSettings() {
         specialChars: document.getElementById('specialChars').checked,
         confusing: document.getElementById('confusing').checked
     };
+    return settings;
+}
+function saveSettings() {
+    const settings = getSettings();
     if (hasParamsURL()) {
         // if some params are in the URL then continue using URL
         updateURL(settings);
