@@ -40,7 +40,7 @@ function getEntropy(length, characters) {
 
 
 function generatePasswords() {
-    let length = parseInt(document.getElementById('lengthInput').value);
+    let length = parseInt(document.getElementById('length').value);
     let count = document.getElementById('count').value;
     let characters = '';
     let passwordList = document.getElementById('passwordList');
@@ -116,7 +116,7 @@ function copyToClipboard(text, button) {
 
 function saveSettings() {
     localStorage.setItem('settings', JSON.stringify({
-        length: document.getElementById('lengthInput').value,
+        length: document.getElementById('length').value,
         count: document.getElementById('count').value,
         capitals: document.getElementById('capitals').checked,
         smallCase: document.getElementById('smallCase').checked,
@@ -130,8 +130,7 @@ function saveSettings() {
 function loadSettings() {
     let settings = JSON.parse(localStorage.getItem('settings'));
     if (settings) {
-        let lengthSlider = document.getElementById('lengthInput');
-        lengthSlider.value = settings.length;
+        document.getElementById('length').value = settings.length;
         document.getElementById('count').value = settings.count;
         document.getElementById('capitals').checked = settings.capitals;
         document.getElementById('smallCase').checked = settings.smallCase;
@@ -142,7 +141,7 @@ function loadSettings() {
     }
 }
 
-document.getElementById('lengthInput').oninput = function () {
+document.getElementById('length').oninput = function () {
     saveSettings();
     generatePasswords();
 };
