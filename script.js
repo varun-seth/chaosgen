@@ -111,11 +111,32 @@ function copyToClipboard(text, button) {
         });
 }
 
+function hasParamsURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.size !== 0;
+}
+
+function settingsToParams(settings) {
+    const params = new URLSearchParams();
+
+    for (let key in settings) {
+        params.set(key, settings[key]);
+    }
+    return params
+}
+
+function updateURL(settings) {
+    params = settingsToParams(settings);
+    history.pushState({}, '', '?' + params.toString());
+}
 
 
+function saveLocal(settings) {
+    // localStorage.setItem('settings', JSON.stringify(settings));
+}
 
 function saveSettings() {
-    localStorage.setItem('settings', JSON.stringify({
+    const settings = {
         length: document.getElementById('length').value,
         count: document.getElementById('count').value,
         capitals: document.getElementById('capitals').checked,
@@ -124,20 +145,43 @@ function saveSettings() {
         unreserved: document.getElementById('unreserved').checked,
         specialChars: document.getElementById('specialChars').checked,
         confusing: document.getElementById('confusing').checked
-    }));
+    };
+    if (hasParamsURL()) {
+        // if some params are in the URL then continue using URL
+        updateURL(settings);
+    }
+    else {
+        // if the URL is clean then use local storage.
+        saveLocal(settings);
+    }
 }
 
 function loadSettings() {
-    let settings = JSON.parse(localStorage.getItem('settings'));
-    if (settings) {
-        document.getElementById('length').value = settings.length;
-        document.getElementById('count').value = settings.count;
-        document.getElementById('capitals').checked = settings.capitals;
-        document.getElementById('smallCase').checked = settings.smallCase;
-        document.getElementById('numbers').checked = settings.numbers;
-        document.getElementById('unreserved').checked = settings.unreserved;
-        document.getElementById('specialChars').checked = settings.specialChars;
-        document.getElementById('confusing').checked = settings.confusing;
+    const params = new URLSearchParams(window.location.search);
+    let settings = JSON.parse(localStorage.getItem('settings') || "{}");
+    if (params.size !== 0) {
+        for (let key of params.keys()) {
+
+            let value = params.get(key);
+            // For boolean values (checkboxes), convert string to boolean
+            if (value === 'true') {
+                settings[key] = true;
+            } else if (value === 'false') {
+                settings[key] = false;
+            } else {
+                settings[key] = value;
+            }
+
+        }
+    }
+    for (let key in settings) {
+        let form = document.getElementById(key);
+        if (form.type == 'checkbox') {
+            form.checked = settings[key];
+        }
+        else {
+            form.value = settings[key];
+        }
     }
 }
 
