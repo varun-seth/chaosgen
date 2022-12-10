@@ -85,8 +85,6 @@ function generatePasswords() {
         listItem.appendChild(buttonElement);
         passwordList.appendChild(listItem);
     }
-
-    saveSettings();
 }
 
 function flashButton(button, newText, originalText) {
@@ -139,7 +137,7 @@ function updateURL(settings) {
 
 
 function saveLocal(settings) {
-    // localStorage.setItem('settings', JSON.stringify(settings));
+    localStorage.setItem('settings', JSON.stringify(settings));
 }
 function getSettings() {
     const settings = {
