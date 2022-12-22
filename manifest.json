@@ -1,7 +1,7 @@
 {
-    "name": "Password Generator",
-    "short_name": "PassGen",
-    "description": "Generates uniformly random passwords, cryptographically secure",
+    "name": "ChaosGen",
+    "short_name": "ChaosGen",
+    "description": "Generates uniformly random & cryptographically secure strings",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#202b38",
